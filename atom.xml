@@ -62,11 +62,11 @@
       <category term="开发笔记" scheme="http://chace0120.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="nginx" scheme="http://chace0120.github.io/tags/nginx/"/>
-    
       <category term="centos" scheme="http://chace0120.github.io/tags/centos/"/>
     
       <category term="linux" scheme="http://chace0120.github.io/tags/linux/"/>
+    
+      <category term="nginx" scheme="http://chace0120.github.io/tags/nginx/"/>
     
   </entry>
   
@@ -145,11 +145,11 @@ make
       <category term="开发笔记" scheme="http://chace0120.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
+      <category term="redis" scheme="http://chace0120.github.io/tags/redis/"/>
+    
       <category term="centos" scheme="http://chace0120.github.io/tags/centos/"/>
     
       <category term="linux" scheme="http://chace0120.github.io/tags/linux/"/>
-    
-      <category term="redis" scheme="http://chace0120.github.io/tags/redis/"/>
     
   </entry>
   
@@ -195,11 +195,11 @@ make
       <category term="开发笔记" scheme="http://chace0120.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
+      <category term="springboot" scheme="http://chace0120.github.io/tags/springboot/"/>
+    
       <category term="maven" scheme="http://chace0120.github.io/tags/maven/"/>
     
       <category term="module" scheme="http://chace0120.github.io/tags/module/"/>
-    
-      <category term="springboot" scheme="http://chace0120.github.io/tags/springboot/"/>
     
   </entry>
   
@@ -230,9 +230,9 @@ make
       <category term="开发笔记" scheme="http://chace0120.github.io/categories/%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="springboot" scheme="http://chace0120.github.io/tags/springboot/"/>
-    
       <category term="spring" scheme="http://chace0120.github.io/tags/spring/"/>
+    
+      <category term="springboot" scheme="http://chace0120.github.io/tags/springboot/"/>
     
       <category term="interceptor" scheme="http://chace0120.github.io/tags/interceptor/"/>
     

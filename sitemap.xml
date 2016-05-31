@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chace0120.github.io/categories/index.html</loc>
+    
+    <lastmod>2016-05-31T13:03:57.142Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://chace0120.github.io/tags/index.html</loc>
+    
+    <lastmod>2016-05-31T13:02:08.317Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://chace0120.github.io/2016/05/21/Linux%E4%B8%8BRedis%E7%9A%84%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/</loc>
     
     <lastmod>2016-05-23T13:52:32.935Z</lastmod>
@@ -33,13 +47,6 @@
     <loc>http://chace0120.github.io/2016/03/28/Java%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E7%9A%84%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</loc>
     
     <lastmod>2016-03-29T13:49:02.074Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://chace0120.github.io/tags/index.html</loc>
-    
-    <lastmod>2016-03-29T12:19:07.902Z</lastmod>
     
   </url>
   
