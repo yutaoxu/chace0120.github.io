@@ -89,7 +89,7 @@
 <meta name="description" content="Do The Best!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Chace's Blog">
-<meta property="og:url" content="http://chace0120.github.io/tags/centos/index.html">
+<meta property="og:url" content="http://chace0120.github.io/page/2/index.html">
 <meta property="og:site_name" content="Chace's Blog">
 <meta property="og:description" content="Do The Best!">
 <meta name="twitter:card" content="summary">
@@ -112,7 +112,7 @@
   };
 </script>
 
-  <title> 标签: centos | Chace's Blog </title>
+  <title> Chace's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -143,7 +143,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -230,103 +232,131 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        centos
-        <small>标签</small>
-      </h2>
-    </div>
-
+  <section id="posts" class="posts-expand">
     
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/06/08/CentOS部署应用常用命令汇总/" itemprop="url">
-              
-                <span itemprop="name">CentOS部署应用常用命令汇总</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-06-08T17:05:40+08:00"
-              content="2016-06-08" >
-          06-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/05/23/CentOS下安装Nginx/" itemprop="url">
-              
-                <span itemprop="name">CentOS下安装Nginx</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-23T09:29:40+08:00"
-              content="2016-05-23" >
-          05-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/05/21/Linux下Redis的安装过程/" itemprop="url">
-              
-                <span itemprop="name">Linux下Redis的安装过程</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-05-21T10:50:40+08:00"
-              content="2016-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/28/Java中文乱码的一种解决方案/" itemprop="url">
+                  Java中文乱码的一种解决方案
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-28T20:21:18+08:00" content="2016-03-28">
+              2016-03-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/28/Java中文乱码的一种解决方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/Java中文乱码的一种解决方案/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在jsp中常见的乱码解决办法无外乎是关于get和post两种方式的，但只有切实地在实践中使用时才会注意或者说注重到其他方式。例如，在http请求头中传送中文参数，出现乱码，如何解决？</p>
+<p>实际场景：使用Spring提供的RestTemplate向WebService发送put请求，使用HttpHeader类装载需要传递的参数（包括中文）。请求端系统使用的是utf-8编码，而服务端使用的是gbk编码，使用http监听工具查看所发出的http请求信息，发现header中的中文参数乱码。</p>
+<p>尝试的方法:</p>
+<ol>
+<li>在服务端接收到参数时，utf-8转gbk，无效。</li>
+<li>在服务端接收到参数时，iso-8859-1转gbk，无效。</li>
+<li>在发送请求前将中文参数转码，utf-8转iso-8859-1，无效。</li>
+<li>在请求端，HttpHeader设定ContentType为“application/json;UTF-8”，无效。</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> String(remark.getBytes(<span class="string">"UTF-8"</span>), <span class="string">"ISO-8859-1"</span>);</span><br><span class="line">--------------------------</span><br><span class="line">headers.setContentType(Media.valueOf(<span class="string">"application/json;UTF-8"</span>));</span><br></pre></td></tr></table></figure>
+<p>写到这里，有人应该感觉到这有点“病急乱投医”的感觉了，没有头绪地在试着各种方式。是的，起初我觉得是请求header中采用了ISO-8859-1的编码，但尝试后很显然不是；后来我觉着是否是RestTemplate中采用的HttpMessageConverter方式所决定的，但没能找到很好的证明方式，查资料说的是StringHttpMessageConverter默认采用的是ISO-8859-1编码，可我觉得我指定了ContentType为application/json，RestTemplate不应该去调用StringHttpMessageConverter啊，其中的原理还有待深究。个人感觉这种情况出问题的可能性最大。</p>
+<p>最后，在网上看到一篇文章后，看了一种建议方式，并且是可行的，就是使用URLEncode，将中文参数在传参前进行encode。这里以GBK编码是为了在服务器端接收参数后无需再转码了，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">list.add(URLEncode.encode(name, <span class="string">"GBK"</span>));</span><br></pre></td></tr></table></figure>
+<p>URLEncode方式可以解决这种特定场景的中文乱码问题，相信理解其原理后还可以运用到更多的场景。目前我在网上看到的，关于用URLEncode处理中文乱码最多的场景就是文件下载时中文文件名乱码。</p>
+<p>关于Java中文乱码的原理及解决办法可以参看一下<a href="http://www.ibm.com/developerworks/cn/java/j-lo-chinesecoding/" target="_blank" rel="external">这里</a>。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
