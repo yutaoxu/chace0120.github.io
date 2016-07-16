@@ -255,6 +255,337 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/15/SpringBoot多数据源及MyBatis配置详解/" itemprop="url">
+                  SpringBoot多数据源及MyBatis配置详解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-15T16:38:40+08:00" content="2016-07-15">
+              2016-07-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">开发笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/15/SpringBoot多数据源及MyBatis配置详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/15/SpringBoot多数据源及MyBatis配置详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近迫于项目需要，笔者踏上了springboot多数据源的配置之旅。之前笔者配置过spring的动态多数据源切换，当时使用的是JDBC Template。</p>
+<p>目前项目中持久化框架使用是mybatis，经过分析后不难发现，多数据源配置需要解决两个问题，一个是由原先的spring经典方式切换到了springboot方式下，多数据源如何配置？有无太大变化？另一个是怎样将多数据源与mybatis的配置关联起来？</p>
+<p>不妨先来看下,单数据源下mybatis如何配置的？</p>
+<h3 id="单数据源示例"><a href="#单数据源示例" class="headerlink" title="单数据源示例"></a>单数据源示例</h3><p>首先要声明一点，项目只是依赖单个数据源时，如果你不介意springboot帮你做事的话，那么恭喜你，你省事儿了！你只需要在项目的属性文件中添加数据源的相关属性配置，springboot会“免费”提供给你一个数据源使用，默认采用的是<a href="https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html" target="_blank" rel="external">tomcat jdbc connection pool</a>。</p>
+<p>当然你可以拒绝springboot的好意，如果你依赖第三方的连接池技术，你可以配置自己的数据源，那么springboot检测到你自己定义了DataSource后，就不会自动配置数据源了。</p>
+<p>笔者不能拒绝springboot的好意，所以仅在项目的application.properties中添加了如下属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url=jdbc:mysql:<span class="comment">//localhost:3306/test</span></span><br><span class="line">spring.datasource.username=root</span><br><span class="line">spring.datasource.password=root</span><br><span class="line">spring.datasource.driver-<span class="class"><span class="keyword">class</span>-<span class="title">name</span></span>=com.mysql.jdbc.Driver</span><br><span class="line">spring.datasource.max-idle=<span class="number">10</span></span><br><span class="line">spring.datasource.max-wait=<span class="number">10000</span></span><br><span class="line">spring.datasource.min-idle=<span class="number">5</span></span><br><span class="line">spring.datasource.initial-size=<span class="number">5</span></span><br><span class="line">spring.datasource.validation-query=SELECT <span class="number">1</span></span><br><span class="line">spring.datasource.test-on-borrow=<span class="keyword">false</span></span><br><span class="line">spring.datasource.test-<span class="keyword">while</span>-idle=<span class="keyword">true</span></span><br><span class="line">spring.datasource.time-between-eviction-runs-millis=<span class="number">18800</span></span><br></pre></td></tr></table></figure>
+<p>然后笔者创建了一个专门用于配置mybatis的类，如下:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MybatisSpringConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"sqlSessionFactory"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactory <span class="title">sqlSessionFactory</span><span class="params">(DataSource dataSource)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SqlSessionFactoryBean factoryBean = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        factoryBean.setDataSource(dataSource);</span><br><span class="line">        factoryBean.setTypeAliasesPackage(<span class="string">"demo.model"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> factoryBean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MapperScannerConfigurer <span class="title">mapperScannerConfigurer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        MapperScannerConfigurer mapperScannerConfigurer = <span class="keyword">new</span> MapperScannerConfigurer();</span><br><span class="line">        mapperScannerConfigurer.setBasePackage(<span class="string">"demo.repository"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mapperScannerConfigurer;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>没错，mybatis在spring中就是可以通过如此的简练配置进而正常工作起来。你无需刻意地去创建mybatis的配置文件，无需刻意地去注册mapper接口及指定对应xml文件的位置，这完全得益于<a href="http://www.mybatis.org/spring/" target="_blank" rel="external">mybatis-spring</a>，它就像一个“粘合剂”，可以很方便地将mybatis和spring“粘合”在一起。</p>
+<h4 id="MyBatis-Spring的配置步骤"><a href="#MyBatis-Spring的配置步骤" class="headerlink" title="MyBatis-Spring的配置步骤"></a>MyBatis-Spring的配置步骤</h4><p>不妨先来说下mybatis-spring配置的一般步骤：</p>
+<p>1 配置数据源DataSource的Bean。<br>2 使用DataSource配置事务管理器。<br>3 使用DataSource配置SqlSessionFactory的Bean。<br>4 配置MapperScannerConfigurer的Bean。</p>
+<p>这里要求配置事务管理器和SqlSessionFactory的数据源必须是同一个，否则事务管理不起作用。配置MapperScannerConfigurer的目的是自动扫描mapper接口所在的包，自动帮你将mapper接口注册为Bean（代理生成接口的实现类），你就可以直接拿来依赖注入了，建议将mapper接口及其对应的xml文件放在同一个包下，这样的话你无需在SqlSessionFactory里指定xml文件的位置了。</p>
+<p>OK，到此对比我上面贴出的配置类内容，你可能会发现笔者怎么少了几步？感谢springboot，因为它自动配置了一个DataSource，同时它还自动配置了一个事务管理器。所以笔者只配置了SqlSessionFactory和MapperScannerConfigurer。</p>
+<p>当然如果看到这里你仍然“执意”要配置自己的数据源，参照下面的多数据源配置说明，抽出来多个中的一个就可以实现自定义单数据源的配置了。</p>
+<h3 id="多数据源示例"><a href="#多数据源示例" class="headerlink" title="多数据源示例"></a>多数据源示例</h3><p>经过上面单数据源的示例，可以说当我们切换到springboot的方式下写代码时，springboot为我们带来了很大的便利，还不影响我们自定义，所以笔者认为，没用使用springboot之前，无论你使用spring怎样的配置，使用springboot之后，不会有阻碍，甚至会比原来更快！</p>
+<p>简单说下需要多数据源的场景，笔者参照了一下其他的文章，绝大部分的需要来自于数据库主从方式或读写分离。那么就按照master和slave两个数据源，直接贴出数据源的配置类。</p>
+<ul>
+<li>application.properties</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">datasource.master.url=jdbc:mysql:<span class="comment">//localhost:3306/master</span></span><br><span class="line">datasource.master.username=root</span><br><span class="line">datasource.master.password=root</span><br><span class="line">datasource.master.driver-<span class="class"><span class="keyword">class</span>-<span class="title">name</span></span>=com.mysql.jdbc.Driver</span><br><span class="line">datasource.master.max-idle=<span class="number">10</span></span><br><span class="line">datasource.master.max-wait=<span class="number">10000</span></span><br><span class="line">datasource.master.min-idle=<span class="number">5</span></span><br><span class="line">datasource.master.initial-size=<span class="number">5</span></span><br><span class="line">datasource.master.validation-query=SELECT <span class="number">1</span></span><br><span class="line">datasource.master.test-on-borrow=<span class="keyword">false</span></span><br><span class="line">datasource.master.test-<span class="keyword">while</span>-idle=<span class="keyword">true</span></span><br><span class="line">datasource.master.time-between-eviction-runs-millis=<span class="number">18800</span></span><br><span class="line"></span><br><span class="line">datasource.slave.url=jdbc:mysql:<span class="comment">//localhost:3306/slave</span></span><br><span class="line">datasource.slave.username=root</span><br><span class="line">datasource.slave.password=root</span><br><span class="line">datasource.slave.driver-<span class="class"><span class="keyword">class</span>-<span class="title">name</span></span>=com.mysql.jdbc.Driver</span><br><span class="line">datasource.slave.max-idle=<span class="number">10</span></span><br><span class="line">datasource.slave.max-wait=<span class="number">10000</span></span><br><span class="line">datasource.slave.min-idle=<span class="number">5</span></span><br><span class="line">datasource.slave.initial-size=<span class="number">5</span></span><br><span class="line">datasource.slave.validation-query=SELECT <span class="number">1</span></span><br><span class="line">datasource.slave.test-on-borrow=<span class="keyword">false</span></span><br><span class="line">datasource.slave.test-<span class="keyword">while</span>-idle=<span class="keyword">true</span></span><br><span class="line">datasource.slave.time-between-eviction-runs-millis=<span class="number">18800</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>master数据源</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MasterConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Primary</span></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"masterDataSource"</span>)</span><br><span class="line">    <span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"datasource.master"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> DataSourceBuilder.create().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Primary</span></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"masterTransactionManager"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSourceTransactionManager <span class="title">transactionManager</span><span class="params">(@Qualifier(<span class="string">"masterDataSource"</span>)</span> DataSource dataSource) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DataSourceTransactionManager(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>slave数据源</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SlaveConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"slaveDataSource"</span>)</span><br><span class="line">    <span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"datasource.slave"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> DataSourceBuilder.create().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"slaveTransactionManager"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSourceTransactionManager <span class="title">transactionManager</span><span class="params">(@Qualifier(<span class="string">"slaveDataSource"</span>)</span> DataSource dataSource) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DataSourceTransactionManager(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>不难看出两个数据源的配置步骤吧：</p>
+<p>1 在属性文件中配置两个数据源需要用到的属性值，注意起个好点的前缀名称。<br>2 构建两个数据源的配置类，当然这不是必须的，愿意堆在一个配置类中未尝不可。<br>3 配置类中，配置DataSource的Bean，记得起个能够标识的name！<br>4 配置两个数据源各自对应的事务管理器，别嫌麻烦，否则会给自己埋坑里，记得起个能够标识的name！</p>
+<p>配置DataSource时，利用@ConfigurationProperties(prefix = “xxx.xxx”)可以依靠指定的前缀，在诸多的属性值中“挑选”出数据源依赖的属性，进而完成数据源的构建。</p>
+<p>当自己定义了DataSource后，springboot就会取消自动配置的动作了。为了各司其职，为每个数据源配置各自的事务管理器，springboot自然也会取消自动配置事务管理器的动作。由于是多个数据源和多个事务管理器，都是一个类型的，你要是不起个区别的名字，任谁都分辨不出来吧？</p>
+<p><em>@Primary</em> 有什么作用呢？简单地说，当有两个同一类型的Bean，依赖注入时你没有指定name，正常情况下会报错，有两个你要的Bean，识别不了。但是 <em>@Primary</em> 相当于指定这个Bean为默认的，如果你没有指定name，就采用 <em>@Primary</em> 标识的Bean。</p>
+<p>OK，两个数据源的配置配好了，还需要配置各自的Mybatis来进行持久化的操作。</p>
+<h4 id="MyBatis-Spring相关配置"><a href="#MyBatis-Spring相关配置" class="headerlink" title="MyBatis-Spring相关配置"></a>MyBatis-Spring相关配置</h4><ul>
+<li>mybatis for master</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@MapperScan</span>(basePackages = &#123;<span class="string">"demo.repository.master"</span>&#125;, sqlSessionFactoryRef = <span class="string">"masterSqlSessionFactory"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MasterConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Primary</span></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"masterDataSource"</span>)</span><br><span class="line">    <span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"datasource.master"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> DataSourceBuilder.create().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Primary</span></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"masterTransactionManager"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSourceTransactionManager <span class="title">transactionManager</span><span class="params">(@Qualifier(<span class="string">"masterDataSource"</span>)</span> DataSource dataSource) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DataSourceTransactionManager(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Primary</span></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"masterSqlSessionFactory"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactory <span class="title">sqlSessionFactory</span><span class="params">(@Qualifier(<span class="string">"masterDataSource"</span>)</span> DataSource dataSource) <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SqlSessionFactoryBean factoryBean = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        factoryBean.setDataSource(dataSource);</span><br><span class="line">        factoryBean.setTypeAliasesPackage(<span class="string">"demo.model"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> factoryBean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>mybatis for slave</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@MapperScan</span>(basePackages = &#123;<span class="string">"demo.repository.slave"</span>&#125;, sqlSessionFactoryRef = <span class="string">"slaveSqlSessionFactory"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SlaveConfig</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"slaveDataSource"</span>)</span><br><span class="line">    <span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"datasource.slave"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">dataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> DataSourceBuilder.create().build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"slaveTransactionManager"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSourceTransactionManager <span class="title">transactionManager</span><span class="params">(@Qualifier(<span class="string">"slaveDataSource"</span>)</span> DataSource dataSource) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> DataSourceTransactionManager(dataSource);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span>(name = <span class="string">"slaveSqlSessionFactory"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> SqlSessionFactory <span class="title">basicSqlSessionFactory</span><span class="params">(@Qualifier(<span class="string">"slaveDataSource"</span>)</span> DataSource basicDataSource) <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        SqlSessionFactoryBean factoryBean = <span class="keyword">new</span> SqlSessionFactoryBean();</span><br><span class="line">        factoryBean.setDataSource(basicDataSource);</span><br><span class="line">        factoryBean.setTypeAliasesPackage(<span class="string">"demo.model"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> factoryBean.getObject();</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要强调几个地方：</p>
+<p>1 细心人会发现上面的配置类中，少了MapperScannerConfigurer的Bean配置，改用了@MapperScan注解。其实两者的作用是一样的，但是@MapperScan比较新，稍后会做解释为什么它比较新。<br>2 由于两个数据源的原因，引出了两套SqlSessionFactory的配置，所以@MapperScan中需要指明依赖的是哪个SqlSessionFactory，“sqlSessionFactoryRef”对应就是SqlSessionFactory的name属性。<br>3 @MapperScan会将扫描的mapper接口代理生成实现类，并自动注册为Bean。由于两个数据源的配置类中都有@MapperScan注解，为了避免造成冲突和排错时的困扰，猛烈提醒，两个数据源的配置，mybatis对应的mapper接口及对应xml文件也构建两套，最好接口名上也做些区分。model类使用同一套倒是没什么影响。所以你会看到上面的配置中，@MapperScan中basePackages指向的是两个包路径。</p>
+<p>好了，来解释下@MapperScan为何比较新，并且笔者推荐使用@MapperScan。</p>
+<p>首先@MapperScan要求的mybatis-spring版本比较新，说明它是新推出的特性。</p>
+<p>其次@MapperScan要比配置MapperScannerConfigurer的Bean要简练的多，代码量上就看得出来。</p>
+<p>最后，@MapperScan中的basePackageClasses属性是MapperScannerConfigurer所没有的。并且笔者用到了这个basePackageClasses属性，所以这里强力推荐使用@MapperScan注解。</p>
+<p>多聊一些，描述下笔者为何会用到@MapperScan中的basePackageClasses属性吧，况且与上述示例中的basePackages有何区别呢？</p>
+<p>上面提到了多数据源的一般场景，笔者的不同。笔者的项目中划分了n个子模块，每个子模块有各自的数据库，现在需要每个子模块共享一个公共信息的数据库。</p>
+<p>从代码上来说，由于各个子模块依赖的公共信息数据库-数据源、mapper接口和xml映射文件是相同的，笔者希望将这些类和文件抽离到maven的一个公共module（最后会打包为一个jar文件）中，供其他n个子模块依赖使用，这样可以避免重复代码嘛。</p>
+<p>笔者这么做之后，发现配置MapperScannerConfigurer的basePackages找不到mapper接口所在的包路径，因为笔者是在子模块中配置的MapperScannerConfigurer，它自然会在子模块的结构中去寻找指定的包路径，是mapper接口被笔者放到了公共的module中，所以是找不到的！</p>
+<p>不过还好在@MapperScan中发现了basePackageClasses属性，它会“接受”你指定的mapper接口的全名。再次提醒，记得把xml映射文件和mapper接口放在一起，mybatis-spring会帮你做关联。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>1 以上是笔者亲自操作过后的经验总结，阅读者需要对springboot、mybatis-spring有所了解，理解起来才不会吃力。<br>2 经历过多数据源的配置过程之后，笔者发现mybatis-spring官方文档的中文版比英文版是有缺失的，不够新！所以强烈建议查阅英文版文档，上述贴出的链接中就是英文版的地址。<br>3 关于springboot多数据源配置的文章很多，但大多数只是贴出了代码，没有说明为何，而且配置方法还各有不同。所以应用者不能只是应用，需要自己搞清楚原因，才是学习的过程。<br>4 笔者上面的描述内容很多，如有不明白之处，欢迎讨论指正。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/30/Ubuntu下快速安装Nginx/" itemprop="url">
+                  Ubuntu下快速安装Nginx
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-30T16:14:40+08:00" content="2016-06-30">
+              2016-06-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">开发笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/06/30/Ubuntu下快速安装Nginx/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/30/Ubuntu下快速安装Nginx/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Linux操作系统有很多不同的发行版本，像Ubuntu、CentOS、RedHat等等，有些是收费的，有些是免费的。接触过Linux的人多少对这些信息有些了解。虽然版本不同，但大部分系统命令还是一致的，可能会有细微的差别。</p>
+<p>今天笔者就经历一把不同版本的Linux操作系统中安装nginx。笔者之前写过一篇CentOS下安装nginx的文章，这次由于客户那边换了个新的服务器，Ubuntu的，没办法，再来一遍~对比两次的安装经历，诞生了这篇文章。</p>
+<h3 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h3><p>虽然发行版本不同，但说白了还都是Linux的系统，所以系统命令没有太大差别。安装nginx，我们可以选择纯手工方式和自动化方式。</p>
+<p>纯手工方式就是自己下载tar.gz包，然后编译安装。这种方式在CentOS和Ubuntu下是无差别的。</p>
+<p>自动化方式即利用系统中的软件库，通过快捷命令实现一键安装。CentOS常见的是yum，而Ubuntu中方便的的是apt。这里可以理解为windows操作系统中的360软件管家，里面有许多现成的软件供我们一键安装到位！</p>
+<p>笔者是个懒人~自然还是选择自动化的方式。</p>
+<p>原先在CentOS下靠的是yum，结果到Ubuntu下一看，没有！网上帖子和文章还是以apt居多，那自然选用apt走着。</p>
+<p>但笔者突然先发现使用apt安装nginx的命令中并没有指定版本号，所以笔者好奇自动安装的nginx版本是啥呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sudo apt-cache policy &lt;packagename&gt;</span><br></pre></td></tr></table></figure>
+<p>将<packagename>换成nginx一看，版本是1.4.6。笔者觉着有点低，怎么样才能利用apt安装最新的版本呢？根据查看nginx官网的安装说明和其他文章作为验证，总结出以下的快速安装方法，而且是最新版本呦。</packagename></p>
+<p>1 从Nginx官网下载供apt程序认证使用的key，具体说明点<a href="http://nginx.org/en/linux_packages.html#stable" target="_blank" rel="external">这里</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># cd /tmp</span><br><span class="line"># wget http://nginx.org/keys/nginx_signing.key</span><br></pre></td></tr></table></figure>
+<p>2 将下载好的认证key添加到apt程序的key中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># sudo apt-key add nginx_signing.key</span><br></pre></td></tr></table></figure>
+<p>3 向/etc/apt/sourses.list文件中追加如下内容：</p>
+<blockquote>
+<p>deb <a href="http://nginx.org/packages/mainline/ubuntu/" target="_blank" rel="external">http://nginx.org/packages/mainline/ubuntu/</a> {codename} nginx</p>
+<p>deb-src <a href="http://nginx.org/packages/mainline/ubuntu/" target="_blank" rel="external">http://nginx.org/packages/mainline/ubuntu/</a> {codename} nginx</p>
+</blockquote>
+<p>上述内容中的codename需要替换成Nginx官方指定的值，这里需要先查看下Ubuntu的版本是啥？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># lsb_release -a</span><br></pre></td></tr></table></figure>
+<p>笔者的Ubuntu版本是14.04，对照<a href="http://nginx.org/en/linux_packages.html#distributions" target="_blank" rel="external">这里</a>，codename应该换成trusty。所以最终内容应该是：</p>
+<blockquote>
+<p>deb <a href="http://nginx.org/packages/mainline/ubuntu/" target="_blank" rel="external">http://nginx.org/packages/mainline/ubuntu/</a> trusty nginx</p>
+<p>deb-src <a href="http://nginx.org/packages/mainline/ubuntu/" target="_blank" rel="external">http://nginx.org/packages/mainline/ubuntu/</a> trusty nginx</p>
+</blockquote>
+<p>记得保存退出文件哦~</p>
+<p>4 执行apt安装的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># sudo apt-get update</span><br><span class="line"># sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+<p>搞定！当然如果不介意nginx的版本，可以直接进行第4步，安装过程更快了一步。</p>
+<h3 id="测试运行"><a href="#测试运行" class="headerlink" title="测试运行"></a>测试运行</h3><p>依靠apt自动安装过nginx后，文件的结构大致如下：</p>
+<ul>
+<li>所有的配置文件在/etc/nginx目录下。</li>
+<li>执行程序文件在/usr/sbin/nginx目录下。</li>
+<li>日志放在/var/log/nginx目录下。</li>
+</ul>
+<p>自动化安装方式默认已经在/etc/init.d下创建了nginx的启动脚本，所以可以很方便地使用如下的命令来操纵nginx服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># service nginx &#123;start|stop|status|restart|reload|configtest&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/08/CentOS部署应用常用命令汇总/" itemprop="url">
                   CentOS部署应用常用命令汇总
                 </a>
@@ -283,8 +614,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开发笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">开发笔记</span>
+                  <a href="/categories/系统运维/" itemprop="url" rel="index">
+                    <span itemprop="name">系统运维</span>
                   </a>
                 </span>
 
@@ -340,6 +671,20 @@
 <p>/dev/null表示运行jar时控制台输出重定向到null中，就是控制台不显示信息。</p>
 </blockquote>
 <p>&amp;表示程序作为后台进程运行，这样即使关闭控制终端，程序依然在运行不会终止。</p>
+<p>运行jar时可能需要配置内存，运行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -Xmx1024m -Xms1024m -jar &lt;jar包位置&gt; &gt;/dev/null &amp;</span><br></pre></td></tr></table></figure>
+<h4 id="查看程序内存占用的排行信息"><a href="#查看程序内存占用的排行信息" class="headerlink" title="查看程序内存占用的排行信息"></a>查看程序内存占用的排行信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eo rss,pmem,pcpu,vsize,args |  sort -k 1 -r -n | less</span><br></pre></td></tr></table></figure>
+<ul>
+<li>rss: resident set size,表示进程占用RAM(内存)的大小，单位是KB</li>
+<li>pmem: %M, 占用内存的百分比</li>
+<li>pcpu: %C，占用cpu的百分比</li>
+<li>vsize: 表示进程占用的虚拟内存的大小，KB</li>
+<li>args: 进程名（command）</li>
+</ul>
+<p>sort命令对ps结果进行排序</p>
+<p>-k 1: 按第一个参数 rss进行排序</p>
+<p>-r: 逆序</p>
+<p>-n: numeric，按数字来排序</p>
 
           
         
@@ -624,8 +969,8 @@ make
 <li>redis-check-aof：数据修复工具</li>
 <li>redis-check-dump：检查导出工具</li>
 </ul>
-<p>接着执行安装命令，redis默认会将上述的可执行文件生成到/usr/local/bin目录下，你也可以通过命令参数来指定安装的目录位置，具体查看redis程序目录下的ReadMe文件。</p>
-<p>编译安装过后，就可以在任意的位置执行redis服务了，不需要每次执行都要带上执行文件的路径位置了。</p>
+<p>手动将上述的执行文件复制到/usr/local/bin下，即可在任意位置执行这些redis命令了，不需要每次执行都要带上执行文件的路径位置了。</p>
+<p>或者你还可以执行make install命令，默认会自动将生成的可执行文件复制到/usr/local/bin下，你也可以通过命令参数来指定安装的目录位置，具体查看redis程序目录下的ReadMe文件。</p>
 <blockquote>
 <p>可能你会问，linux下安装程序，一般都是需要./configure,make和make install三个步骤，为何这里没有configure？那是因为configure是程序安装目录下的一个可执行脚本，一般用来生成 Makefile，为下一步的编译做准备。而redis的安装包中已经存在一个Makefile，所以自然省去了configure这步。</p>
 </blockquote>
@@ -663,276 +1008,29 @@ make
 <li>appendonly：是否开启appendonlylog，开启的话每次写操作会记一条log，这会提高数据抗风险能力，但影响效率</li>
 <li>appendfsync：appendonlylog如何同步到磁盘。三个选项，分别是每次写都强制调用fsync、每秒启用一次fsync、不调用fsync等待系统自己同步</li>
 </ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/13/Maven项目多模块的打包/" itemprop="url">
-                  Maven项目多模块的打包
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-13T23:08:49+08:00" content="2016-05-13">
-              2016-05-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开发笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">开发笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/13/Maven项目多模块的打包/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/13/Maven项目多模块的打包/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。</p>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
-<li>项目：P</li>
-<li>Module A：后面简称A</li>
-<li>Module B：后面简称B</li>
-<li>Module Common：后面简称C</li>
-</ul>
-<p>A依赖C，B也依赖C，A和B可以分别打包成可执行的jar文件。</p>
-<h3 id="Modules的打包"><a href="#Modules的打包" class="headerlink" title="Modules的打包"></a>Modules的打包</h3><p>目前已开发完毕A的功能，需要将A打包并进行部署。当使用Maven对A直接进行package时，提示依赖于C的jar包找不到。因为直接对A打包，C并没有被打包，依赖关系无法保持。</p>
-<p>但是如果直接对P进行package，P的pom中定义了所有的modules,会对执行所有的modules执行打包，在加上A的pom中声明对C的依赖，可以成功生成可执行的A的jar包。</p>
+<h3 id="最佳配置实践"><a href="#最佳配置实践" class="headerlink" title="最佳配置实践"></a>最佳配置实践</h3><p>进入到redis的解压目录下，开始进行如下的配置操作：</p>
 <ul>
-<li>P的pom.xml</li>
+<li>创建配置文件和数据文件的存储位置</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">modules</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>C<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>A<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">module</span>&gt;</span>B<span class="tag">&lt;/<span class="name">module</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">modules</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /etc/redis</span><br><span class="line">sudo mkdir /var/redis</span><br></pre></td></tr></table></figure>
 <ul>
-<li>A的pom.xml</li>
+<li>复制redis解压包中的启动脚本到操作系统的自启动目录下，建议重命名文件时加上端口号</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>xxxxx<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>C<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>PS：</strong>这里注意C打包出来的应该是不可执行的jar包，所以不要在C的pom中定义spring-boot-maven-plugin插件，因为这个SpringBoot插件会在Maven的package后进行二次打包，目的为了生成可执行jar包，如果C中定义了这个插件，会报错提示没有找到main函数。</p>
-<h3 id="按需打包"><a href="#按需打包" class="headerlink" title="按需打包"></a>按需打包</h3><p>上述的打包方式，不太优雅。笔者只需要对A进行打包，因为A依赖C，进而需要对C进行打包。但是如果对P进行打包的话，B会“无辜”地被牵连到，B也会被打包。而且如果一个项目中的modules很多的话，每个module打包前还需要执行编译、测试等生命周期，未必高效。</p>
-<p>那么笔者现在需要的是只对A和C进行打包，如何做到呢？执行如下命令：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -pl A -am install</span><br></pre></td></tr></table></figure>
-<p>上述命令的意思是指定构建Module A，同时依据依赖树的路径，构建A的依赖（无论是直接的还是间接的）。注意这里的命令是install，而不是package。</p>
-<p>具体命令选项的含义可查看<a href="http://blog.sonatype.com/2009/10/maven-tips-and-tricks-advanced-reactor-options/" target="_blank" rel="external">这里</a>。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/11/Spring拦截器中@Value无效的解决办法/" itemprop="url">
-                  Spring拦截器中@Value无效的解决办法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-11T23:08:49+08:00" content="2016-05-11">
-              2016-05-11
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开发笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">开发笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/05/11/Spring拦截器中@Value无效的解决办法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/11/Spring拦截器中@Value无效的解决办法/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近在使用SpringBoot开发项目时，用到了SpringMVC拦截器的功能。鉴于SpringBoot指南中建议使用Java Config的配置方式，拦截器的配置也不例外，从原先的xml配置方式转为了Java Config。</p>
-<p>首先贴出拦截器的一种配置方式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.addInterceptors(registry);</span><br><span class="line"></span><br><span class="line">        registry.addInterceptor(<span class="keyword">new</span> LogInterceptor()).addPathPatterns(<span class="string">"/**"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的拦截器配置在网上搜索一下，也是随处可见的。拦截器可以正常运作，但是拦截器中@Value注解的属性值为null，没有读取到期望的properties文件中的值。</p>
-<p>再看拦截器的另一种配置方式：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Bean</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> LogInterceptor <span class="title">logInterceptor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> LogInterceptor();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.addInterceptors(registry);</span><br><span class="line"></span><br><span class="line">        registry.addInterceptor(logInterceptor()).addPathPatterns(<span class="string">"/**"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果按照上面的配置方式，@Value注解可以成功注入properties文件中的属性值。</p>
-<p>思考：第一种方式中，拦截器是手动new出来的，拦截器中的依赖注入并未得到处理；第二种方式，同样是new出来的拦截器，但通过@Bean的声明，表明拦截器是Spring管理的bean，依赖注入工作自然Spring会做处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp ./utils/redis_init_script /etc/init.d/redis_6379</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编辑自启动的redis脚本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/init.d/redis_6379</span><br></pre></td></tr></table></figure>
+<p>将其中<strong>REDISPORT</strong>改为实际使用的端口号。仔细查看脚本中的代码，会发现其中pid文件路径和配置文件名称都依赖于端口号。</p>
+<ul>
+<li>复制配置文件到etc下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp ./redis.conf /etc/redis/6379.conf</span><br></pre></td></tr></table></figure>
+<p>可以看到，实际使用的配置文件以端口号来命名，这样自启动脚本执行时就会使用这个配置文件。</p>
+<ul>
+<li>创建redis的工作数据目录，建议以端口进行区分</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /var/redis/6379</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1006,7 +1104,7 @@ make
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1014,7 +1112,7 @@ make
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1023,7 +1121,7 @@ make
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
