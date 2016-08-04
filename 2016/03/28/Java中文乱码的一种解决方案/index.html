@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Chace's Blog">
 <meta property="og:description" content="在jsp中常见的乱码解决办法无外乎是关于get和post两种方式的，但只有切实地在实践中使用时才会注意或者说注重到其他方式。例如，在http请求头中传送中文参数，出现乱码，如何解决？
 实际场景：使用Spring提供的RestTemplate向WebService发送put请求，使用HttpHeader类装载需要传递的参数（包括中文）。请求端系统使用的是utf-8编码，而服务端使用的是gbk编码，使">
-<meta property="og:updated_time" content="2016-03-29T13:49:02.074Z">
+<meta property="og:updated_time" content="2016-08-04T14:08:21.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java中文乱码的一种解决方案">
 <meta name="twitter:description" content="在jsp中常见的乱码解决办法无外乎是关于get和post两种方式的，但只有切实地在实践中使用时才会注意或者说注重到其他方式。例如，在http请求头中传送中文参数，出现乱码，如何解决？
@@ -305,6 +305,7 @@
       
         <p>在jsp中常见的乱码解决办法无外乎是关于get和post两种方式的，但只有切实地在实践中使用时才会注意或者说注重到其他方式。例如，在http请求头中传送中文参数，出现乱码，如何解决？</p>
 <p>实际场景：使用Spring提供的RestTemplate向WebService发送put请求，使用HttpHeader类装载需要传递的参数（包括中文）。请求端系统使用的是utf-8编码，而服务端使用的是gbk编码，使用http监听工具查看所发出的http请求信息，发现header中的中文参数乱码。</p>
+<a id="more"></a>
 <p>尝试的方法:</p>
 <ol>
 <li>在服务端接收到参数时，utf-8转gbk，无效。</li>

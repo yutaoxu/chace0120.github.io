@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://chace0120.github.io/"/>
-  <updated>2016-07-16T14:07:08.922Z</updated>
+  <updated>2016-08-04T14:07:53.382Z</updated>
   <id>http://chace0120.github.io/</id>
   
   <author>
@@ -20,11 +20,12 @@
     <link href="http://chace0120.github.io/2016/07/15/SpringBoot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E5%8F%8AMyBatis%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/"/>
     <id>http://chace0120.github.io/2016/07/15/SpringBoot多数据源及MyBatis配置详解/</id>
     <published>2016-07-15T08:38:40.000Z</published>
-    <updated>2016-07-16T14:07:08.922Z</updated>
+    <updated>2016-08-04T14:07:53.382Z</updated>
     
     <content type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近迫于项目需要，笔者踏上了springboot多数据源的配置之旅。之前笔者配置过spring的动态多数据源切换，当时使用的是JDBC Template。&lt;/p&gt;
 &lt;p&gt;目前项目中持久化框架使用是mybatis，经过分析后不难发现，多数据源配置需要解决两个问题，一个是由原先的spring经典方式切换到了springboot方式下，多数据源如何配置？有无太大变化？另一个是怎样将多数据源与mybatis的配置关联起来？&lt;/p&gt;
 &lt;p&gt;不妨先来看下,单数据源下mybatis如何配置的？&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h3 id=&quot;单数据源示例&quot;&gt;&lt;a href=&quot;#单数据源示例&quot; class=&quot;headerlink&quot; title=&quot;单数据源示例&quot;&gt;&lt;/a&gt;单数据源示例&lt;/h3&gt;&lt;p&gt;首先要声明一点，项目只是依赖单个数据源时，如果你不介意springboot帮你做事的话，那么恭喜你，你省事儿了！你只需要在项目的属性文件中添加数据源的相关属性配置，springboot会“免费”提供给你一个数据源使用，默认采用的是&lt;a href=&quot;https://tomcat.apache.org/tomcat-7.0-doc/jdbc-pool.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;tomcat jdbc connection pool&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;当然你可以拒绝springboot的好意，如果你依赖第三方的连接池技术，你可以配置自己的数据源，那么springboot检测到你自己定义了DataSource后，就不会自动配置数据源了。&lt;/p&gt;
 &lt;p&gt;笔者不能拒绝springboot的好意，所以仅在项目的application.properties中添加了如下属性：&lt;/p&gt;
@@ -81,7 +82,9 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近迫于项目需要，笔者踏上了springboot多数据源的配置之旅。之前笔者配置过spring的动态多数据源切换，当时使用的是JDBC Te
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近迫于项目需要，笔者踏上了springboot多数据源的配置之旅。之前笔者配置过spring的动态多数据源切换，当时使用的是JDBC Template。&lt;/p&gt;
+&lt;p&gt;目前项目中持久化框架使用是mybatis，经过分析后不难发现，多数据源配置需要解决两个问题，一个是由原先的spring经典方式切换到了springboot方式下，多数据源如何配置？有无太大变化？另一个是怎样将多数据源与mybatis的配置关联起来？&lt;/p&gt;
+&lt;p&gt;不妨先来看下,单数据源下mybatis如何配置的？&lt;/p&gt;
     
     </summary>
     
@@ -103,10 +106,11 @@
     <link href="http://chace0120.github.io/2016/06/30/Ubuntu%E4%B8%8B%E5%BF%AB%E9%80%9F%E5%AE%89%E8%A3%85Nginx/"/>
     <id>http://chace0120.github.io/2016/06/30/Ubuntu下快速安装Nginx/</id>
     <published>2016-06-30T08:14:40.000Z</published>
-    <updated>2016-07-16T13:23:41.204Z</updated>
+    <updated>2016-08-04T14:08:55.858Z</updated>
     
     <content type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;Linux操作系统有很多不同的发行版本，像Ubuntu、CentOS、RedHat等等，有些是收费的，有些是免费的。接触过Linux的人多少对这些信息有些了解。虽然版本不同，但大部分系统命令还是一致的，可能会有细微的差别。&lt;/p&gt;
 &lt;p&gt;今天笔者就经历一把不同版本的Linux操作系统中安装nginx。笔者之前写过一篇CentOS下安装nginx的文章，这次由于客户那边换了个新的服务器，Ubuntu的，没办法，再来一遍~对比两次的安装经历，诞生了这篇文章。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h3 id=&quot;Nginx安装&quot;&gt;&lt;a href=&quot;#Nginx安装&quot; class=&quot;headerlink&quot; title=&quot;Nginx安装&quot;&gt;&lt;/a&gt;Nginx安装&lt;/h3&gt;&lt;p&gt;虽然发行版本不同，但说白了还都是Linux的系统，所以系统命令没有太大差别。安装nginx，我们可以选择纯手工方式和自动化方式。&lt;/p&gt;
 &lt;p&gt;纯手工方式就是自己下载tar.gz包，然后编译安装。这种方式在CentOS和Ubuntu下是无差别的。&lt;/p&gt;
 &lt;p&gt;自动化方式即利用系统中的软件库，通过快捷命令实现一键安装。CentOS常见的是yum，而Ubuntu中方便的的是apt。这里可以理解为windows操作系统中的360软件管家，里面有许多现成的软件供我们一键安装到位！&lt;/p&gt;
@@ -147,7 +151,8 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;Linux操作系统有很多不同的发行版本，像Ubuntu、CentOS、RedHat等等，有些是收费的，有些是免费的。接触过Linux的人多少
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;Linux操作系统有很多不同的发行版本，像Ubuntu、CentOS、RedHat等等，有些是收费的，有些是免费的。接触过Linux的人多少对这些信息有些了解。虽然版本不同，但大部分系统命令还是一致的，可能会有细微的差别。&lt;/p&gt;
+&lt;p&gt;今天笔者就经历一把不同版本的Linux操作系统中安装nginx。笔者之前写过一篇CentOS下安装nginx的文章，这次由于客户那边换了个新的服务器，Ubuntu的，没办法，再来一遍~对比两次的安装经历，诞生了这篇文章。&lt;/p&gt;
     
     </summary>
     
@@ -167,10 +172,11 @@
     <link href="http://chace0120.github.io/2016/06/08/CentOS%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/"/>
     <id>http://chace0120.github.io/2016/06/08/CentOS部署应用常用命令汇总/</id>
     <published>2016-06-08T09:05:40.000Z</published>
-    <updated>2016-07-16T13:23:41.188Z</updated>
+    <updated>2016-08-04T14:08:02.459Z</updated>
     
     <content type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近项目在不断地更新迭代，项目部署也由笔者来做了。由于笔者不是专业的Linux服务器运维人员，所以好多用到的命令都是现查现用。这里汇总一下笔者目前自己用的命令，方便今后查阅。&lt;/p&gt;
 &lt;p&gt;当然随着部署工作的不断进行，笔者也会陆续更新学习到的内容。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h3 id=&quot;常用命令&quot;&gt;&lt;a href=&quot;#常用命令&quot; class=&quot;headerlink&quot; title=&quot;常用命令&quot;&gt;&lt;/a&gt;常用命令&lt;/h3&gt;&lt;h4 id=&quot;删除目录或文件&quot;&gt;&lt;a href=&quot;#删除目录或文件&quot; class=&quot;headerlink&quot; title=&quot;删除目录或文件&quot;&gt;&lt;/a&gt;删除目录或文件&lt;/h4&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;rm -rf &amp;lt;目录或文件&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;选项f表示强制删除，注意使用。&lt;/p&gt;
 &lt;h4 id=&quot;解压缩zip压缩包&quot;&gt;&lt;a href=&quot;#解压缩zip压缩包&quot; class=&quot;headerlink&quot; title=&quot;解压缩zip压缩包&quot;&gt;&lt;/a&gt;解压缩zip压缩包&lt;/h4&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;unzip &amp;lt;zip文件位置&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -202,7 +208,8 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近项目在不断地更新迭代，项目部署也由笔者来做了。由于笔者不是专业的Linux服务器运维人员，所以好多用到的命令都是现查现用。这里汇总一下笔
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近项目在不断地更新迭代，项目部署也由笔者来做了。由于笔者不是专业的Linux服务器运维人员，所以好多用到的命令都是现查现用。这里汇总一下笔者目前自己用的命令，方便今后查阅。&lt;/p&gt;
+&lt;p&gt;当然随着部署工作的不断进行，笔者也会陆续更新学习到的内容。&lt;/p&gt;
     
     </summary>
     
@@ -220,11 +227,12 @@
     <link href="http://chace0120.github.io/2016/05/23/CentOS%E4%B8%8B%E5%AE%89%E8%A3%85Nginx/"/>
     <id>http://chace0120.github.io/2016/05/23/CentOS下安装Nginx/</id>
     <published>2016-05-23T01:29:40.000Z</published>
-    <updated>2016-05-23T13:49:16.885Z</updated>
+    <updated>2016-08-04T14:08:12.403Z</updated>
     
     <content type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;项目需要，自己整个nginx玩玩，部署服务器的操作系统为CentOS 6.5。&lt;/p&gt;
 &lt;h3 id=&quot;nginx安装&quot;&gt;&lt;a href=&quot;#nginx安装&quot; class=&quot;headerlink&quot; title=&quot;nginx安装&quot;&gt;&lt;/a&gt;nginx安装&lt;/h3&gt;&lt;p&gt;上网搜了一下关于nginx的安装教程，大致存在两种安装方法，都是通过yum install命令来完成。&lt;/p&gt;
 &lt;p&gt;方法一：自己选择下载安装nginx依赖的其他包，然后下载nginx的安装包，编译安装即可。这种方式的好处是扩展性强，往后需要安装其他模块都是可控的。不妥之处是步骤繁琐，依赖包多，需要牢记。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;可参照如下教程：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;http://seanlook.com/2015/05/17/nginx-install-and-config/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;nginx服务器安装及配置文件详解&lt;/a&gt;&lt;/li&gt;
@@ -255,7 +263,8 @@
     <summary type="html">
     
       &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;项目需要，自己整个nginx玩玩，部署服务器的操作系统为CentOS 6.5。&lt;/p&gt;
-&lt;h3 id=&quot;nginx安装&quot;&gt;&lt;a href=&quot;
+&lt;h3 id=&quot;nginx安装&quot;&gt;&lt;a href=&quot;#nginx安装&quot; class=&quot;headerlink&quot; title=&quot;nginx安装&quot;&gt;&lt;/a&gt;nginx安装&lt;/h3&gt;&lt;p&gt;上网搜了一下关于nginx的安装教程，大致存在两种安装方法，都是通过yum install命令来完成。&lt;/p&gt;
+&lt;p&gt;方法一：自己选择下载安装nginx依赖的其他包，然后下载nginx的安装包，编译安装即可。这种方式的好处是扩展性强，往后需要安装其他模块都是可控的。不妥之处是步骤繁琐，依赖包多，需要牢记。&lt;/p&gt;
     
     </summary>
     
@@ -275,10 +284,11 @@
     <link href="http://chace0120.github.io/2016/05/21/Linux%E4%B8%8BRedis%E7%9A%84%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B/"/>
     <id>http://chace0120.github.io/2016/05/21/Linux下Redis的安装过程/</id>
     <published>2016-05-21T02:50:40.000Z</published>
-    <updated>2016-07-16T13:23:41.204Z</updated>
+    <updated>2016-08-04T14:08:28.091Z</updated>
     
     <content type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;在linux操作系统下安装redis的教程，网上已经烂大街了，笔者觉着自己在配置过程中有些操作不太理解，所以在此重新梳理一下安装过程，并对一些要点着重进行说明。&lt;/p&gt;
 &lt;p&gt;笔者的服务器为CentOS 6.5，redis下载的版本为当前最新的稳定版本。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h3 id=&quot;下载redis&quot;&gt;&lt;a href=&quot;#下载redis&quot; class=&quot;headerlink&quot; title=&quot;下载redis&quot;&gt;&lt;/a&gt;下载redis&lt;/h3&gt;&lt;p&gt;下载redis的方式主要有两种，一种是自己下载tar.gz包，然后上传到服务器上进行解压缩。另一种是通过wget命令直接下载redis的压缩包到服务器，然后解压缩。&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;wget http://download.redis.io/releases/redis-3.0.5.tar.gz
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;看到此处时，根据自己的需要去选择redis的版本。&lt;/p&gt;
@@ -361,7 +371,8 @@ make
     
     <summary type="html">
     
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;在linux操作系统下安装redis的教程，网上已经烂大街了，笔者觉着自己在配置过程中有些操作不太理解，所以在此重新梳理一下安装过程，并对一
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;在linux操作系统下安装redis的教程，网上已经烂大街了，笔者觉着自己在配置过程中有些操作不太理解，所以在此重新梳理一下安装过程，并对一些要点着重进行说明。&lt;/p&gt;
+&lt;p&gt;笔者的服务器为CentOS 6.5，redis下载的版本为当前最新的稳定版本。&lt;/p&gt;
     
     </summary>
     
@@ -381,9 +392,10 @@ make
     <link href="http://chace0120.github.io/2016/05/13/Maven%E9%A1%B9%E7%9B%AE%E5%A4%9A%E6%A8%A1%E5%9D%97%E7%9A%84%E6%89%93%E5%8C%85/"/>
     <id>http://chace0120.github.io/2016/05/13/Maven项目多模块的打包/</id>
     <published>2016-05-13T15:08:49.000Z</published>
-    <updated>2016-05-15T15:41:41.313Z</updated>
+    <updated>2016-08-04T14:08:34.009Z</updated>
     
     <content type="html">&lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;h3 id=&quot;说明&quot;&gt;&lt;a href=&quot;#说明&quot; class=&quot;headerlink&quot; title=&quot;说明&quot;&gt;&lt;/a&gt;说明&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;项目：P&lt;/li&gt;
 &lt;li&gt;Module A：后面简称A&lt;/li&gt;
@@ -411,7 +423,7 @@ make
     
     <summary type="html">
     
-      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。&lt;/p&gt;
     
     </summary>
     
@@ -466,10 +478,11 @@ make
     <link href="http://chace0120.github.io/2016/03/28/Java%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E7%9A%84%E4%B8%80%E7%A7%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"/>
     <id>http://chace0120.github.io/2016/03/28/Java中文乱码的一种解决方案/</id>
     <published>2016-03-28T12:21:18.000Z</published>
-    <updated>2016-03-29T13:49:02.074Z</updated>
+    <updated>2016-08-04T14:08:21.506Z</updated>
     
     <content type="html">&lt;p&gt;在jsp中常见的乱码解决办法无外乎是关于get和post两种方式的，但只有切实地在实践中使用时才会注意或者说注重到其他方式。例如，在http请求头中传送中文参数，出现乱码，如何解决？&lt;/p&gt;
 &lt;p&gt;实际场景：使用Spring提供的RestTemplate向WebService发送put请求，使用HttpHeader类装载需要传递的参数（包括中文）。请求端系统使用的是utf-8编码，而服务端使用的是gbk编码，使用http监听工具查看所发出的http请求信息，发现header中的中文参数乱码。&lt;/p&gt;
+&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
 &lt;p&gt;尝试的方法:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;在服务端接收到参数时，utf-8转gbk，无效。&lt;/li&gt;
@@ -489,7 +502,7 @@ make
     <summary type="html">
     
       &lt;p&gt;在jsp中常见的乱码解决办法无外乎是关于get和post两种方式的，但只有切实地在实践中使用时才会注意或者说注重到其他方式。例如，在http请求头中传送中文参数，出现乱码，如何解决？&lt;/p&gt;
-&lt;p&gt;实际场景：使用Spring提供的RestTemplate向WebServic
+&lt;p&gt;实际场景：使用Spring提供的RestTemplate向WebService发送put请求，使用HttpHeader类装载需要传递的参数（包括中文）。请求端系统使用的是utf-8编码，而服务端使用的是gbk编码，使用http监听工具查看所发出的http请求信息，发现header中的中文参数乱码。&lt;/p&gt;
     
     </summary>
     

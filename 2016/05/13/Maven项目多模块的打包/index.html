@@ -86,28 +86,16 @@
 
 
 
-<meta name="description" content="前言最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。
-说明
-项目：P
-Module A：后面简称A
-M">
+<meta name="description" content="前言最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Maven项目多模块的打包">
 <meta property="og:url" content="http://chace0120.github.io/2016/05/13/Maven项目多模块的打包/index.html">
 <meta property="og:site_name" content="Chace's Blog">
-<meta property="og:description" content="前言最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。
-说明
-项目：P
-Module A：后面简称A
-M">
-<meta property="og:updated_time" content="2016-05-15T15:41:41.313Z">
+<meta property="og:description" content="前言最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。">
+<meta property="og:updated_time" content="2016-08-04T14:08:34.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven项目多模块的打包">
-<meta name="twitter:description" content="前言最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。
-说明
-项目：P
-Module A：后面简称A
-M">
+<meta name="twitter:description" content="前言最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。">
 
 
 
@@ -332,6 +320,7 @@ M">
 
       
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近使用SpringBoot开发项目，同时使用的构建工具是Maven。首次应用Maven的多模块(Modules)方式进行的项目构建，原因在于项目分为多个子模块进行阶段性开发，而其中多个子模块中存在重复的代码段，为了避免重复性地copy代码，决定将重复的代码进行抽离，放在一个公共的module里，其他module对这个公共module进行依赖。</p>
+<a id="more"></a>
 <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
 <li>项目：P</li>
 <li>Module A：后面简称A</li>

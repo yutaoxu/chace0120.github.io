@@ -87,21 +87,18 @@
 
 
 <meta name="description" content="前言在linux操作系统下安装redis的教程，网上已经烂大街了，笔者觉着自己在配置过程中有些操作不太理解，所以在此重新梳理一下安装过程，并对一些要点着重进行说明。
-笔者的服务器为CentOS 6.5，redis下载的版本为当前最新的稳定版本。
-下载redis下载redis的方式主要有两种，一种是自己下载tar.gz包，然后上传到服务器上进行解压缩。另一种是通过wget命令直接下载redis的压缩">
+笔者的服务器为CentOS 6.5，redis下载的版本为当前最新的稳定版本。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下Redis的安装过程">
 <meta property="og:url" content="http://chace0120.github.io/2016/05/21/Linux下Redis的安装过程/index.html">
 <meta property="og:site_name" content="Chace's Blog">
 <meta property="og:description" content="前言在linux操作系统下安装redis的教程，网上已经烂大街了，笔者觉着自己在配置过程中有些操作不太理解，所以在此重新梳理一下安装过程，并对一些要点着重进行说明。
-笔者的服务器为CentOS 6.5，redis下载的版本为当前最新的稳定版本。
-下载redis下载redis的方式主要有两种，一种是自己下载tar.gz包，然后上传到服务器上进行解压缩。另一种是通过wget命令直接下载redis的压缩">
-<meta property="og:updated_time" content="2016-07-16T13:23:41.204Z">
+笔者的服务器为CentOS 6.5，redis下载的版本为当前最新的稳定版本。">
+<meta property="og:updated_time" content="2016-08-04T14:08:28.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下Redis的安装过程">
 <meta name="twitter:description" content="前言在linux操作系统下安装redis的教程，网上已经烂大街了，笔者觉着自己在配置过程中有些操作不太理解，所以在此重新梳理一下安装过程，并对一些要点着重进行说明。
-笔者的服务器为CentOS 6.5，redis下载的版本为当前最新的稳定版本。
-下载redis下载redis的方式主要有两种，一种是自己下载tar.gz包，然后上传到服务器上进行解压缩。另一种是通过wget命令直接下载redis的压缩">
+笔者的服务器为CentOS 6.5，redis下载的版本为当前最新的稳定版本。">
 
 
 
@@ -327,6 +324,7 @@
       
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在linux操作系统下安装redis的教程，网上已经烂大街了，笔者觉着自己在配置过程中有些操作不太理解，所以在此重新梳理一下安装过程，并对一些要点着重进行说明。</p>
 <p>笔者的服务器为CentOS 6.5，redis下载的版本为当前最新的稳定版本。</p>
+<a id="more"></a>
 <h3 id="下载redis"><a href="#下载redis" class="headerlink" title="下载redis"></a>下载redis</h3><p>下载redis的方式主要有两种，一种是自己下载tar.gz包，然后上传到服务器上进行解压缩。另一种是通过wget命令直接下载redis的压缩包到服务器，然后解压缩。</p>
 <pre><code>wget http://download.redis.io/releases/redis-3.0.5.tar.gz
 </code></pre><p>看到此处时，根据自己的需要去选择redis的版本。</p>
