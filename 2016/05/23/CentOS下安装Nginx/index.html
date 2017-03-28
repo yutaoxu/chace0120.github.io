@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,9 +27,12 @@
 
 
 
+
+
+
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -63,23 +66,21 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="centos,linux,nginx," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Chace's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="Nginx,CentOS,Linux," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -88,38 +89,57 @@
 
 <meta name="description" content="前言项目需要，自己整个nginx玩玩，部署服务器的操作系统为CentOS 6.5。
 nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安装方法，都是通过yum install命令来完成。
-方法一：自己选择下载安装nginx依赖的其他包，然后下载nginx的安装包，编译安装即可。这种方式的好处是扩展性强，往后需要安装其他模块都是可控的。不妥之处是步骤繁琐，依赖包多，需要牢记。">
+方法一：自己选择下载安装nginx依赖的其他包，然后下载nginx的安装包，编译安装即可。这种方式的好处是扩展性强，往后需要安装其他模块都是可控的。不妥之处是步骤繁琐，依赖包多，需要牢记。
+可参照如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS下安装Nginx">
 <meta property="og:url" content="http://chace0120.github.io/2016/05/23/CentOS下安装Nginx/index.html">
-<meta property="og:site_name" content="Chace's Blog">
+<meta property="og:site_name" content="chace's blogs">
 <meta property="og:description" content="前言项目需要，自己整个nginx玩玩，部署服务器的操作系统为CentOS 6.5。
 nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安装方法，都是通过yum install命令来完成。
-方法一：自己选择下载安装nginx依赖的其他包，然后下载nginx的安装包，编译安装即可。这种方式的好处是扩展性强，往后需要安装其他模块都是可控的。不妥之处是步骤繁琐，依赖包多，需要牢记。">
-<meta property="og:updated_time" content="2016-08-04T14:08:12.403Z">
+方法一：自己选择下载安装nginx依赖的其他包，然后下载nginx的安装包，编译安装即可。这种方式的好处是扩展性强，往后需要安装其他模块都是可控的。不妥之处是步骤繁琐，依赖包多，需要牢记。
+可参照如">
+<meta property="og:updated_time" content="2017-03-28T13:40:31.573Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS下安装Nginx">
 <meta name="twitter:description" content="前言项目需要，自己整个nginx玩玩，部署服务器的操作系统为CentOS 6.5。
 nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安装方法，都是通过yum install命令来完成。
-方法一：自己选择下载安装nginx依赖的其他包，然后下载nginx的安装包，编译安装即可。这种方式的好处是扩展性强，往后需要安装其他模块都是可控的。不妥之处是步骤繁琐，依赖包多，需要牢记。">
+方法一：自己选择下载安装nginx依赖的其他包，然后下载nginx的安装包，编译安装即可。这种方式的好处是扩展性强，往后需要安装其他模块都是可控的。不妥之处是步骤繁琐，依赖包多，需要牢记。
+可参照如">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> CentOS下安装Nginx | Chace's Blog </title>
+
+
+  <link rel="canonical" href="http://chace0120.github.io/2016/05/23/CentOS下安装Nginx/"/>
+
+
+
+
+
+  <title> CentOS下安装Nginx | chace's blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -128,15 +148,19 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
 
 
 
+
+
   <script type="text/javascript">
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?de9626072cacc18e044754e40624cb5f";
+      hm.src = "https://hm.baidu.com/hm.js?de9626072cacc18e044754e40624cb5f";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+
 
 
 
@@ -150,29 +174,33 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Chace's Blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">chace's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">nice to meet you</p>
+      
   </div>
-  <p class="site-subtitle">Go AHead!</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -229,6 +257,8 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -242,13 +272,23 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
     
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://chace0120.github.io/2016/05/23/CentOS下安装Nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chace">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/xhr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chace's blogs">
+    </span>
 
     
       <header class="post-header">
@@ -267,24 +307,36 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-23T09:29:40+08:00" content="2016-05-23">
-              2016-05-23
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-23T09:29:40+08:00">
+                2016-05-23
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/开发笔记/" itemprop="url" rel="index">
                     <span itemprop="name">开发笔记</span>
                   </a>
@@ -292,7 +344,6 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
 
                 
                 
-
               
             </span>
           
@@ -300,20 +351,27 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/2016/05/23/CentOS下安装Nginx/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/23/CentOS下安装Nginx/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/05/23/CentOS下安装Nginx/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
@@ -328,7 +386,6 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>项目需要，自己整个nginx玩玩，部署服务器的操作系统为CentOS 6.5。</p>
 <h3 id="nginx安装"><a href="#nginx安装" class="headerlink" title="nginx安装"></a>nginx安装</h3><p>上网搜了一下关于nginx的安装教程，大致存在两种安装方法，都是通过yum install命令来完成。</p>
 <p>方法一：自己选择下载安装nginx依赖的其他包，然后下载nginx的安装包，编译安装即可。这种方式的好处是扩展性强，往后需要安装其他模块都是可控的。不妥之处是步骤繁琐，依赖包多，需要牢记。</p>
-<a id="more"></a>
 <p>可参照如下教程：</p>
 <ul>
 <li><a href="http://seanlook.com/2015/05/17/nginx-install-and-config/" target="_blank" rel="external">nginx服务器安装及配置文件详解</a></li>
@@ -336,6 +393,7 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
 <li><a href="http://www.jianshu.com/p/d5114a2a2052" target="_blank" rel="external">CentOS nginx安装与配置</a></li>
 </ul>
 <p>方法二：由于CentOS下，yum源不提供nginx的安装，所以可以通过添加yum源进行快速安装。这种方式的好处是快，方便。不妥之处是不可控，都是别人准备好的东西进行的“一键安装”，今后想安装第三方模块也无从下手。而且笔者目前对这种方式也不是特别理解，所以可能出了差错，也爱莫能助。</p>
+<a id="more"></a>
 <p>可参照如下教程：</p>
 <ul>
 <li><a href="https://gist.github.com/ifels/c8cfdfe249e27ffa9ba1" target="_blank" rel="external">CentOS 6.5 nginx安装与配置</a></li>
@@ -343,24 +401,32 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>如果你已经浏览过上述提供的安装方式后，这里可以对nginx的安装过程进行一些总结。</p>
 <p>其实概括地来讲，安装nginx的步骤为两步，先安装nginx依赖的库，然后安装nginx。安装方式无非两种，如果yum源中存在需要的库，可以方便地使用yum来安装；如果yum源中没有需要的库，那么只能自己下载对应的安装包，然后执行编译安装命令。当然你也可以完全不使用yum，自己下载所有需要的源码安装包，然后编译安装。</p>
 <h3 id="nginx运行"><a href="#nginx运行" class="headerlink" title="nginx运行"></a>nginx运行</h3><p>假设nginx安装在/usr/local/nginx/sbin下：</p>
-<pre><code># cd /usr/local/nginx
-</code></pre><h4 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h4><pre><code># ./sbin/nginx        # 默认配置文件 conf/nginx.conf，-c 指定
-</code></pre><h4 id="停止nginx"><a href="#停止nginx" class="headerlink" title="停止nginx"></a>停止nginx</h4><pre><code># ./sbin/nginx -s stop
-</code></pre><p>或者</p>
-<pre><code># pkill nginx
-</code></pre><h4 id="重新加载配置文件"><a href="#重新加载配置文件" class="headerlink" title="重新加载配置文件"></a>重新加载配置文件</h4><p>reload用于配置文件改变后的nginx刷新应用，没必要一定得停止nginx。reload不会改变启动时指定的配置文件位置。</p>
-<pre><code># ./sbin/nginx -s reload
-</code></pre><h4 id="系统服务"><a href="#系统服务" class="headerlink" title="系统服务"></a>系统服务</h4><p>当然如果将nginx设置为linux系统服务，那么就可以方便使用下面的命令进行上述的操纵：</p>
-<pre><code># service nginx {start|stop|status|restart|reload|configtest}
-</code></pre><p>笔者使用方法二进行的安装，所以nginx会自动被安装为系统服务了。你也可以搜索如何设置nginx为linux服务。</p>
-<h3 id="其他相关命令"><a href="#其他相关命令" class="headerlink" title="其他相关命令"></a>其他相关命令</h3><h4 id="查看系统中指定端口号是否被占用"><a href="#查看系统中指定端口号是否被占用" class="headerlink" title="查看系统中指定端口号是否被占用"></a>查看系统中指定端口号是否被占用</h4><pre><code># netstat -apn|grep &lt;端口号&gt;
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># cd /usr/local/nginx</div></pre></td></tr></table></figure>
+<h4 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ./sbin/nginx        # 默认配置文件 conf/nginx.conf，-c 指定</div></pre></td></tr></table></figure>
+<h4 id="停止nginx"><a href="#停止nginx" class="headerlink" title="停止nginx"></a>停止nginx</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ./sbin/nginx -s stop</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># pkill nginx</div></pre></td></tr></table></figure>
+<h4 id="重新加载配置文件"><a href="#重新加载配置文件" class="headerlink" title="重新加载配置文件"></a>重新加载配置文件</h4><p>reload用于配置文件改变后的nginx刷新应用，没必要一定得停止nginx。reload不会改变启动时指定的配置文件位置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ./sbin/nginx -s reload</div></pre></td></tr></table></figure>
+<h4 id="系统服务"><a href="#系统服务" class="headerlink" title="系统服务"></a>系统服务</h4><p>当然如果将nginx设置为linux系统服务，那么就可以方便使用下面的命令进行上述的操纵：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># service nginx &#123;start|stop|status|restart|reload|configtest&#125;</div></pre></td></tr></table></figure>
+<p>笔者使用方法二进行的安装，所以nginx会自动被安装为系统服务了。你也可以搜索如何设置nginx为linux服务。</p>
+<h3 id="其他相关命令"><a href="#其他相关命令" class="headerlink" title="其他相关命令"></a>其他相关命令</h3><h4 id="查看系统中指定端口号是否被占用"><a href="#查看系统中指定端口号是否被占用" class="headerlink" title="查看系统中指定端口号是否被占用"></a>查看系统中指定端口号是否被占用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># netstat -apn|grep &lt;端口号&gt;</div></pre></td></tr></table></figure>
+
       
     </div>
 
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -375,13 +441,17 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
       
         <div class="post-tags">
           
-            <a href="/tags/centos/" rel="tag">#centos</a>
+            <a href="/tags/Nginx/" rel="tag"># Nginx</a>
           
-            <a href="/tags/linux/" rel="tag">#linux</a>
+            <a href="/tags/CentOS/" rel="tag"># CentOS</a>
           
-            <a href="/tags/nginx/" rel="tag">#nginx</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
         </div>
+      
+
+      
+        
       
 
       
@@ -393,6 +463,8 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -413,6 +485,29 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
 
     <div class="post-spread">
       
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
     </div>
   </div>
 
@@ -424,8 +519,11 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/05/23/CentOS下安装Nginx/"
-           data-title="CentOS下安装Nginx" data-url="http://chace0120.github.io/2016/05/23/CentOS下安装Nginx/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -459,35 +557,44 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/al.png"
+               src="/images/xhr.jpg"
                alt="chace" />
           <p class="site-author-name" itemprop="name">chace</p>
-          <p class="site-description motion-element" itemprop="description">Do The Best!</p>
+           
+              <p class="site-description motion-element" itemprop="description">Good good study, day day up!</p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">2</span>
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">13</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -496,25 +603,9 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
         </nav>
 
         
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
 
         <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="http://my.oschina.net/angerbaby/blog" target="_blank" title="OSChina">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  OSChina
-                </a>
-              </span>
             
               <span class="links-of-author-item">
                 <a href="https://github.com/chace0120" target="_blank" title="GitHub">
@@ -525,6 +616,15 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
                 </a>
               </span>
             
+              <span class="links-of-author-item">
+                <a href="https://my.oschina.net/angerbaby" target="_blank" title="OSChina">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  OSChina
+                </a>
+              </span>
+            
           
         </div>
 
@@ -534,19 +634,29 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
         
         
 
+        
+
+
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx安装"><span class="nav-number">2.</span> <span class="nav-text">nginx安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">2.1.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx运行"><span class="nav-number">3.</span> <span class="nav-text">nginx运行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启动nginx"><span class="nav-number">3.1.</span> <span class="nav-text">启动nginx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止nginx"><span class="nav-number">3.2.</span> <span class="nav-text">停止nginx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重新加载配置文件"><span class="nav-number">3.3.</span> <span class="nav-text">重新加载配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统服务"><span class="nav-number">3.4.</span> <span class="nav-text">系统服务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他相关命令"><span class="nav-number">4.</span> <span class="nav-text">其他相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看系统中指定端口号是否被占用"><span class="nav-number">4.1.</span> <span class="nav-text">查看系统中指定端口号是否被占用</span></a></li></ol></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
@@ -561,16 +671,17 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">chace</span>
 </div>
 
+
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -580,15 +691,20 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
   </a>
 </div>
 
+
         
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -611,71 +727,87 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
   
-  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
 
 
 
   
 
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
   
+
+
+  
+
     
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"chace0120"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
+      <script id="dsq-count-scr" src="https://chace0120.disqus.com/count.js" async></script>
     
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://chace0120.github.io/2016/05/23/CentOS下安装Nginx/';
+          this.page.identifier = '2016/05/23/CentOS下安装Nginx/';
+          this.page.title = 'CentOS下安装Nginx';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chace0120.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
   
 
 
@@ -683,7 +815,26 @@ nginx安装上网搜了一下关于nginx的安装教程，大致存在两种安�
 
 
   
+
+
+
+
+
   
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
   
 
   

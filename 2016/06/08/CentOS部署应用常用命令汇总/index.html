@@ -5,10 +5,10 @@
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
@@ -27,9 +27,12 @@
 
 
 
+
+
+
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -63,23 +66,21 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="centos,linux," />
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Chace's Blog" type="application/atom+xml" />
+  <meta name="keywords" content="CentOS,Linux," />
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
 
 
 
@@ -87,36 +88,61 @@
 
 
 <meta name="description" content="前言最近项目在不断地更新迭代，项目部署也由笔者来做了。由于笔者不是专业的Linux服务器运维人员，所以好多用到的命令都是现查现用。这里汇总一下笔者目前自己用的命令，方便今后查阅。
-当然随着部署工作的不断进行，笔者也会陆续更新学习到的内容。">
+当然随着部署工作的不断进行，笔者也会陆续更新学习到的内容。
+常用命令删除目录或文件1rm -rf &amp;lt;目录或文件&amp;gt;
+选项f表示强制删除，注意使用。
+解压缩zip压缩包1unzip &amp;lt;zip文件位置&amp;gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS部署应用常用命令汇总">
 <meta property="og:url" content="http://chace0120.github.io/2016/06/08/CentOS部署应用常用命令汇总/index.html">
-<meta property="og:site_name" content="Chace's Blog">
+<meta property="og:site_name" content="chace's blogs">
 <meta property="og:description" content="前言最近项目在不断地更新迭代，项目部署也由笔者来做了。由于笔者不是专业的Linux服务器运维人员，所以好多用到的命令都是现查现用。这里汇总一下笔者目前自己用的命令，方便今后查阅。
-当然随着部署工作的不断进行，笔者也会陆续更新学习到的内容。">
-<meta property="og:updated_time" content="2016-08-04T14:08:02.459Z">
+当然随着部署工作的不断进行，笔者也会陆续更新学习到的内容。
+常用命令删除目录或文件1rm -rf &amp;lt;目录或文件&amp;gt;
+选项f表示强制删除，注意使用。
+解压缩zip压缩包1unzip &amp;lt;zip文件位置&amp;gt;">
+<meta property="og:updated_time" content="2017-03-28T13:39:27.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS部署应用常用命令汇总">
 <meta name="twitter:description" content="前言最近项目在不断地更新迭代，项目部署也由笔者来做了。由于笔者不是专业的Linux服务器运维人员，所以好多用到的命令都是现查现用。这里汇总一下笔者目前自己用的命令，方便今后查阅。
-当然随着部署工作的不断进行，笔者也会陆续更新学习到的内容。">
+当然随着部署工作的不断进行，笔者也会陆续更新学习到的内容。
+常用命令删除目录或文件1rm -rf &amp;lt;目录或文件&amp;gt;
+选项f表示强制删除，注意使用。
+解压缩zip压缩包1unzip &amp;lt;zip文件位置&amp;gt;">
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
+    root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: 0,
+      userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
-  <title> CentOS部署应用常用命令汇总 | Chace's Blog </title>
+
+
+  <link rel="canonical" href="http://chace0120.github.io/2016/06/08/CentOS部署应用常用命令汇总/"/>
+
+
+
+
+
+  <title> CentOS部署应用常用命令汇总 | chace's blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -125,15 +151,19 @@
 
 
 
+
+
   <script type="text/javascript">
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?de9626072cacc18e044754e40624cb5f";
+      hm.src = "https://hm.baidu.com/hm.js?de9626072cacc18e044754e40624cb5f";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+
 
 
 
@@ -147,29 +177,33 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Chace's Blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">chace's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">nice to meet you</p>
+      
   </div>
-  <p class="site-subtitle">Go AHead!</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -226,6 +260,8 @@
   
 </nav>
 
+
+
  </div>
     </header>
 
@@ -239,13 +275,23 @@
     
 
   
-  
 
   
   
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://chace0120.github.io/2016/06/08/CentOS部署应用常用命令汇总/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chace">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/xhr.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="chace's blogs">
+    </span>
 
     
       <header class="post-header">
@@ -264,24 +310,36 @@
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-08T17:05:40+08:00" content="2016-06-08">
-              2016-06-08
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-08T17:05:40+08:00">
+                2016-06-08
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/系统运维/" itemprop="url" rel="index">
                     <span itemprop="name">系统运维</span>
                   </a>
@@ -289,7 +347,6 @@
 
                 
                 
-
               
             </span>
           
@@ -297,20 +354,27 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/2016/06/08/CentOS部署应用常用命令汇总/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/08/CentOS部署应用常用命令汇总/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2016/06/08/CentOS部署应用常用命令汇总/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
@@ -324,23 +388,23 @@
       
         <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近项目在不断地更新迭代，项目部署也由笔者来做了。由于笔者不是专业的Linux服务器运维人员，所以好多用到的命令都是现查现用。这里汇总一下笔者目前自己用的命令，方便今后查阅。</p>
 <p>当然随着部署工作的不断进行，笔者也会陆续更新学习到的内容。</p>
-<a id="more"></a>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h4 id="删除目录或文件"><a href="#删除目录或文件" class="headerlink" title="删除目录或文件"></a>删除目录或文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf &lt;目录或文件&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h4 id="删除目录或文件"><a href="#删除目录或文件" class="headerlink" title="删除目录或文件"></a>删除目录或文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf &lt;目录或文件&gt;</div></pre></td></tr></table></figure>
 <p>选项f表示强制删除，注意使用。</p>
-<h4 id="解压缩zip压缩包"><a href="#解压缩zip压缩包" class="headerlink" title="解压缩zip压缩包"></a>解压缩zip压缩包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip &lt;zip文件位置&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="解压缩zip压缩包"><a href="#解压缩zip压缩包" class="headerlink" title="解压缩zip压缩包"></a>解压缩zip压缩包</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip &lt;zip文件位置&gt;</div></pre></td></tr></table></figure>
 <p>默认解压到zip所在位置。笔者上传部署项目至服务器上时，习惯打包为zip。</p>
-<h4 id="重命名目录或文件名"><a href="#重命名目录或文件名" class="headerlink" title="重命名目录或文件名"></a>重命名目录或文件名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &lt;目录或文件位置&gt;</span><br><span class="line">mv &lt;目录或文件&gt; ./&lt;新名称&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="重命名目录或文件名"><a href="#重命名目录或文件名" class="headerlink" title="重命名目录或文件名"></a>重命名目录或文件名</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd &lt;目录或文件位置&gt;</div><div class="line">mv &lt;目录或文件&gt; ./&lt;新名称&gt;</div></pre></td></tr></table></figure>
 <p>重命名使用的是mv命令，mv代表移动目录或文件。</p>
-<h4 id="查看指定名称的程序进程"><a href="#查看指定名称的程序进程" class="headerlink" title="查看指定名称的程序进程"></a>查看指定名称的程序进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep &lt;模糊名称&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="查看指定端口号的占用情况"><a href="#查看指定端口号的占用情况" class="headerlink" title="查看指定端口号的占用情况"></a>查看指定端口号的占用情况</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tlnp | grep &lt;端口号&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="可运行jar包的执行"><a href="#可运行jar包的执行" class="headerlink" title="可运行jar包的执行"></a>可运行jar包的执行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar &lt;jar包位置&gt; &gt;/dev/null &amp;</span><br></pre></td></tr></table></figure>
+<h4 id="查看指定名称的程序进程"><a href="#查看指定名称的程序进程" class="headerlink" title="查看指定名称的程序进程"></a>查看指定名称的程序进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps aux | grep &lt;模糊名称&gt;</div></pre></td></tr></table></figure>
+<h4 id="查看指定端口号的占用情况"><a href="#查看指定端口号的占用情况" class="headerlink" title="查看指定端口号的占用情况"></a>查看指定端口号的占用情况</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -tlnp | grep &lt;端口号&gt;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="可运行jar包的执行"><a href="#可运行jar包的执行" class="headerlink" title="可运行jar包的执行"></a>可运行jar包的执行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup java -jar &lt;jar包位置&gt; &gt;/dev/null &amp;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>/dev/null表示运行jar时控制台输出重定向到null中，就是控制台不显示信息。</p>
 </blockquote>
 <p>&amp;表示程序作为后台进程运行，这样即使关闭控制终端，程序依然在运行不会终止。</p>
 <p>运行jar时可能需要配置内存，运行如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -Xmx1024m -Xms1024m -jar &lt;jar包位置&gt; &gt;/dev/null &amp;</span><br></pre></td></tr></table></figure>
-<h4 id="查看程序内存占用的排行信息"><a href="#查看程序内存占用的排行信息" class="headerlink" title="查看程序内存占用的排行信息"></a>查看程序内存占用的排行信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eo rss,pmem,pcpu,vsize,args |  sort -k 1 -r -n | less</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup java -Xmx1024m -Xms1024m -jar &lt;jar包位置&gt; &gt;/dev/null &amp;</div></pre></td></tr></table></figure>
+<h4 id="查看程序内存占用的排行信息"><a href="#查看程序内存占用的排行信息" class="headerlink" title="查看程序内存占用的排行信息"></a>查看程序内存占用的排行信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ps -eo rss,pmem,pcpu,vsize,args |  sort -k 1 -r -n | less</div></pre></td></tr></table></figure>
 <ul>
 <li>rss: resident set size,表示进程占用RAM(内存)的大小，单位是KB</li>
 <li>pmem: %M, 占用内存的百分比</li>
@@ -359,6 +423,14 @@
     <div>
       
         
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -373,11 +445,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/centos/" rel="tag">#centos</a>
+            <a href="/tags/CentOS/" rel="tag"># CentOS</a>
           
-            <a href="/tags/linux/" rel="tag">#linux</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
         </div>
+      
+
+      
+        
       
 
       
@@ -389,6 +465,8 @@
               </a>
             
           </div>
+
+          <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
@@ -409,6 +487,29 @@
 
     <div class="post-spread">
       
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
     </div>
   </div>
 
@@ -420,8 +521,11 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/08/CentOS部署应用常用命令汇总/"
-           data-title="CentOS部署应用常用命令汇总" data-url="http://chace0120.github.io/2016/06/08/CentOS部署应用常用命令汇总/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -455,35 +559,44 @@
         </ul>
       
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/al.png"
+               src="/images/xhr.jpg"
                alt="chace" />
           <p class="site-author-name" itemprop="name">chace</p>
-          <p class="site-description motion-element" itemprop="description">Do The Best!</p>
+           
+              <p class="site-description motion-element" itemprop="description">Good good study, day day up!</p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
-                <span class="site-state-item-count">2</span>
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">13</span>
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -492,25 +605,9 @@
         </nav>
 
         
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
 
         <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="http://my.oschina.net/angerbaby/blog" target="_blank" title="OSChina">
-                  
-                    <i class="fa fa-fw fa-globe"></i>
-                  
-                  OSChina
-                </a>
-              </span>
             
               <span class="links-of-author-item">
                 <a href="https://github.com/chace0120" target="_blank" title="GitHub">
@@ -521,6 +618,15 @@
                 </a>
               </span>
             
+              <span class="links-of-author-item">
+                <a href="https://my.oschina.net/angerbaby" target="_blank" title="OSChina">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  OSChina
+                </a>
+              </span>
+            
           
         </div>
 
@@ -530,19 +636,29 @@
         
         
 
+        
+
+
       </section>
 
       
+      <!--noindex-->
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
           <div class="post-toc">
+
             
               
             
+
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#删除目录或文件"><span class="nav-number">2.1.</span> <span class="nav-text">删除目录或文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解压缩zip压缩包"><span class="nav-number">2.2.</span> <span class="nav-text">解压缩zip压缩包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重命名目录或文件名"><span class="nav-number">2.3.</span> <span class="nav-text">重命名目录或文件名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看指定名称的程序进程"><span class="nav-number">2.4.</span> <span class="nav-text">查看指定名称的程序进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看指定端口号的占用情况"><span class="nav-number">2.5.</span> <span class="nav-text">查看指定端口号的占用情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可运行jar包的执行"><span class="nav-number">2.6.</span> <span class="nav-text">可运行jar包的执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看程序内存占用的排行信息"><span class="nav-number">2.7.</span> <span class="nav-text">查看程序内存占用的排行信息</span></a></li></ol></li></ol></div>
             
+
           </div>
         </section>
+      <!--/noindex-->
+      
+
       
 
     </div>
@@ -557,16 +673,17 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">chace</span>
 </div>
 
+
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
@@ -576,15 +693,20 @@
   </a>
 </div>
 
+
         
 
         
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -607,71 +729,87 @@
 
 
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
 
   
-  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
 
 
 
   
 
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
   
+
+
+  
+
     
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"chace0120"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
+      <script id="dsq-count-scr" src="https://chace0120.disqus.com/count.js" async></script>
     
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://chace0120.github.io/2016/06/08/CentOS部署应用常用命令汇总/';
+          this.page.identifier = '2016/06/08/CentOS部署应用常用命令汇总/';
+          this.page.title = 'CentOS部署应用常用命令汇总';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://chace0120.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
   
 
 
@@ -679,7 +817,26 @@
 
 
   
+
+
+
+
+
   
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
   
 
   
