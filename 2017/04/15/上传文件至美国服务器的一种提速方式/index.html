@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Intellij IDEA," />
+  <meta name="keywords" content="运维," />
 
 
 
@@ -87,19 +87,25 @@
 
 
 
-<meta name="description" content="Compile、Make和Build的区别针对Java的开发工具，一般都有Compile、Make和Build三个菜单项，完成的功能的都差不多，但是又有区别。
-编译，是将源代码转换为可执行代码的过程。编译需要指定源文件和编译输出的文件路径（输出目录）。Java的编译会将java编译为class文件，将非java的文件（一般成为资源文件、比如图片、xml、txt、poperties等文件）原封不动的">
+<meta name="description" content="前言笔者在公司负责的项目是服务于美国用户的，应美国用户的要求，将系统部署在了Amazon EC2中。可能Amazon在美方心中已经先入为主了吧，用户总觉着使用阿里云不够放心。
+之后系统的每次迭代更新、部署，笔者都在与EC2打交道。使用的是Mobaxterm工具，通过SSH和SFTP与服务器进行命令输入和文件传输。但就是在公司安装的号称电信企业级宽带的网络环境（200M）下，上传文件至EC2依然非常">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IDE中Compile,Make和Build的区别(转)">
-<meta property="og:url" content="http://chace0120.github.io/2016/10/26/IDE中Compile,Make和Build的区别/index.html">
+<meta property="og:title" content="上传文件至美国服务器的一种提速方式">
+<meta property="og:url" content="http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/index.html">
 <meta property="og:site_name" content="chace's blogs">
-<meta property="og:description" content="Compile、Make和Build的区别针对Java的开发工具，一般都有Compile、Make和Build三个菜单项，完成的功能的都差不多，但是又有区别。
-编译，是将源代码转换为可执行代码的过程。编译需要指定源文件和编译输出的文件路径（输出目录）。Java的编译会将java编译为class文件，将非java的文件（一般成为资源文件、比如图片、xml、txt、poperties等文件）原封不动的">
-<meta property="og:updated_time" content="2017-03-28T13:41:33.628Z">
+<meta property="og:description" content="前言笔者在公司负责的项目是服务于美国用户的，应美国用户的要求，将系统部署在了Amazon EC2中。可能Amazon在美方心中已经先入为主了吧，用户总觉着使用阿里云不够放心。
+之后系统的每次迭代更新、部署，笔者都在与EC2打交道。使用的是Mobaxterm工具，通过SSH和SFTP与服务器进行命令输入和文件传输。但就是在公司安装的号称电信企业级宽带的网络环境（200M）下，上传文件至EC2依然非常">
+<meta property="og:image" content="http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/img1.jpg">
+<meta property="og:image" content="http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/img2.jpg">
+<meta property="og:image" content="http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/img3.jpg">
+<meta property="og:image" content="http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/img4.jpg">
+<meta property="og:image" content="http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/img5.jpg">
+<meta property="og:updated_time" content="2017-04-15T01:26:09.882Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="IDE中Compile,Make和Build的区别(转)">
-<meta name="twitter:description" content="Compile、Make和Build的区别针对Java的开发工具，一般都有Compile、Make和Build三个菜单项，完成的功能的都差不多，但是又有区别。
-编译，是将源代码转换为可执行代码的过程。编译需要指定源文件和编译输出的文件路径（输出目录）。Java的编译会将java编译为class文件，将非java的文件（一般成为资源文件、比如图片、xml、txt、poperties等文件）原封不动的">
+<meta name="twitter:title" content="上传文件至美国服务器的一种提速方式">
+<meta name="twitter:description" content="前言笔者在公司负责的项目是服务于美国用户的，应美国用户的要求，将系统部署在了Amazon EC2中。可能Amazon在美方心中已经先入为主了吧，用户总觉着使用阿里云不够放心。
+之后系统的每次迭代更新、部署，笔者都在与EC2打交道。使用的是Mobaxterm工具，通过SSH和SFTP与服务器进行命令输入和文件传输。但就是在公司安装的号称电信企业级宽带的网络环境（200M）下，上传文件至EC2依然非常">
+<meta name="twitter:image" content="http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/img1.jpg">
 
 
 
@@ -127,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://chace0120.github.io/2016/10/26/IDE中Compile,Make和Build的区别/"/>
+  <link rel="canonical" href="http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/"/>
 
 
 
 
 
-  <title> IDE中Compile,Make和Build的区别(转) | chace's blogs </title>
+  <title> 上传文件至美国服务器的一种提速方式 | chace's blogs </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -272,7 +278,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://chace0120.github.io/2016/10/26/IDE中Compile,Make和Build的区别/">
+    <link itemprop="mainEntityOfPage" href="http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chace">
@@ -293,7 +299,7 @@
             
             
               
-                IDE中Compile,Make和Build的区别(转)
+                上传文件至美国服务器的一种提速方式
               
             
           </h1>
@@ -308,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-26T09:29:40+08:00">
-                2016-10-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-15T09:29:40+08:00">
+                2017-04-15
               </time>
             
 
@@ -331,8 +337,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">开发笔记</span>
+                  <a href="/categories/系统运维/" itemprop="url" rel="index">
+                    <span itemprop="name">系统运维</span>
                   </a>
                 </span>
 
@@ -349,9 +355,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/10/26/IDE中Compile,Make和Build的区别/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/15/上传文件至美国服务器的一种提速方式/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2016/10/26/IDE中Compile,Make和Build的区别/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/04/15/上传文件至美国服务器的一种提速方式/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -377,16 +383,24 @@
       
 
       
-        <h3 id="Compile、Make和Build的区别"><a href="#Compile、Make和Build的区别" class="headerlink" title="Compile、Make和Build的区别"></a>Compile、Make和Build的区别</h3><p>针对Java的开发工具，一般都有Compile、Make和Build三个菜单项，完成的功能的都差不多，但是又有区别。</p>
-<p>编译，是将源代码转换为可执行代码的过程。编译需要指定源文件和编译输出的文件路径（输出目录）。Java的编译会将java编译为class文件，将非java的文件（一般成为资源文件、比如图片、xml、txt、poperties等文件）原封不动的复制到编译输出目录，并保持源文件夹的目录层次关系。</p>
-<a id="more"></a>
-<p>在Java的集成开发环境中，比如Eclipse、IDEA中，有常常有三种与编译相关的选项Compile、Make、Build三个选项。这三个选项最基本的功能都是完成编译过程。但又有很大的区别，区别如下：</p>
-<ol>
-<li>Compile：只编译选定的目标，不管之前是否已经编译过。</li>
-<li>Make：编译选定的目标，但是Make只编译上次编译变化过的文件，减少重复劳动，节省时间。（具体怎么检查未变化，这个就不用考虑了，IDE自己内部会搞定这些的）</li>
-<li>Build：是对整个工程进行彻底的重新编译，而不管是否已经编译过。Build过程往往会生成发布包，这个具体要看对IDE的配置了，Build在实际中应用很少，因为开发时候基本上不用，发布生产时候一般都用ANT等工具来发布。Build因为要全部编译，还要执行打包等额外工作，因此时间较长。</li>
-</ol>
-<h3 id="原文出处"><a href="#原文出处" class="headerlink" title="原文出处"></a>原文出处</h3><p><a href="http://lavasoft.blog.51cto.com/62575/436216/" target="_blank" rel="external">http://lavasoft.blog.51cto.com/62575/436216/</a></p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>笔者在公司负责的项目是服务于美国用户的，应美国用户的要求，将系统部署在了Amazon EC2中。可能Amazon在美方心中已经先入为主了吧，用户总觉着使用阿里云不够放心。</p>
+<p>之后系统的每次迭代更新、部署，笔者都在与EC2打交道。使用的是Mobaxterm工具，通过SSH和SFTP与服务器进行命令输入和文件传输。但就是在公司安装的号称电信企业级宽带的网络环境（200M）下，上传文件至EC2依然非常乏力。系统更新部署一般选择在美国半夜时间，也就是中国的下午3点到4点之间最佳，恰恰这个时间段内，上传文件十分不稳定，压缩文件区区6.5M，经常会上传一半就会挂掉，还需要手动重新上传。这样的工作效率是非常低的，从上传压缩文件到完成页面、服务的部署，笔者可能需要花费将近一下午的工作时间。<br><a id="more"></a></p>
+<h3 id="利用网盘提速"><a href="#利用网盘提速" class="headerlink" title="利用网盘提速"></a>利用网盘提速</h3><p>既然直接上传很吃力的话，笔者想着换种间接的上传方式。将需要部署的文件先上传至可以快速上传的位置，然后在EC2中使用wget命令进行下载，这样可以减少上传文件所消耗的时间。比如百度网盘，从国内的网络环境上传文件至百度网盘中，速度还是杠杠的。然而笔者在EC2中使用wget命令从百度网盘提供的共享链接下载文件时，依然难以避免跨国网络通信的瓶颈，下载完成的时间遥不可及……</p>
+<p>既然跨国网络通信瓶颈暂时无法解决，笔者再换一种方式！找了个国外的网盘服务-<a href="https://www.dropbox.com/" target="_blank" rel="external">Dropbox</a>，这个网盘服务支持中文，操作也简便。为免费用户提供的免费空间有2G，足以满足笔者的需要。</p>
+<p>首先将Dropbox安装到本地PC中，然后安装教程将需要部署的文件放到PC指定的目录位置，Dropbox程序会自动将文件同步上传到网盘中。</p>
+<img src="/2017/04/15/上传文件至美国服务器的一种提速方式/img1.jpg" alt="img1.jpg" title="">
+<p>然后，点击任务栏中的Dropbox图标，可以查看同步上传完成的进度。</p>
+<img src="/2017/04/15/上传文件至美国服务器的一种提速方式/img2.jpg" alt="img2.jpg" title="">
+<p>同步完成后，可以访问网盘地址，获取共享的链接地址。</p>
+<img src="/2017/04/15/上传文件至美国服务器的一种提速方式/img3.jpg" alt="img3.jpg" title="">
+<img src="/2017/04/15/上传文件至美国服务器的一种提速方式/img4.jpg" alt="img4.jpg" title="">
+<p>点击生成链接后，复制生成的共享链接地址。</p>
+<img src="/2017/04/15/上传文件至美国服务器的一种提速方式/img5.jpg" alt="img5.jpg" title="">
+<p>最后，利用复制的共享链接地址，使用wget命令在EC2中指定的目录下可以“飞速”地将部署文件下载下来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O update.zip &quot;https://www.dropbox.com/s/xbak1k6xzleyig3/update.zip?dl=0&quot;</div></pre></td></tr></table></figure>
+<p>为什么用Dropbox，下载速度会很快？因为Dropbox是美国的网盘服务，所以使美国区域的EC2跟美国区域的网盘服务进行通信传输，自然就像家门口窜门儿似的。</p>
+<p>值得称赞的是，从本地PC同步上传文件到Dropbox的速度还是可以容忍的，也不会突然中断。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上就是笔者暂时想出的一招，可以提升部署文件到大洋远方的美方服务器的效率。如果你有更好的办法，欢迎分享~</p>
 
       
     </div>
@@ -416,7 +430,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Intellij-IDEA/" rel="tag"># Intellij IDEA</a>
+            <a href="/tags/运维/" rel="tag"># 运维</a>
           
         </div>
       
@@ -429,8 +443,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/15/SpringBoot多数据源及MyBatis配置详解/" rel="next" title="SpringBoot多数据源及MyBatis配置详解">
-                <i class="fa fa-chevron-left"></i> SpringBoot多数据源及MyBatis配置详解
+              <a href="/2017/03/25/关于Intellij-IDEA中的Live-Templates实践/" rel="next" title="关于Intellij IDEA中的Live Templates实践">
+                <i class="fa fa-chevron-left"></i> 关于Intellij IDEA中的Live Templates实践
               </a>
             
           </div>
@@ -438,10 +452,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/17/SpringBoot应用在Linux下的监控及服务化脚本实现/" rel="prev" title="SpringBoot应用在CentOS下的监控及服务化脚本实现">
-                SpringBoot应用在CentOS下的监控及服务化脚本实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -620,7 +630,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Compile、Make和Build的区别"><span class="nav-number">1.</span> <span class="nav-text">Compile、Make和Build的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原文出处"><span class="nav-number">2.</span> <span class="nav-text">原文出处</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用网盘提速"><span class="nav-number">2.</span> <span class="nav-text">利用网盘提速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -757,9 +767,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://chace0120.github.io/2016/10/26/IDE中Compile,Make和Build的区别/';
-          this.page.identifier = '2016/10/26/IDE中Compile,Make和Build的区别/';
-          this.page.title = 'IDE中Compile,Make和Build的区别(转)';
+          this.page.url = 'http://chace0120.github.io/2017/04/15/上传文件至美国服务器的一种提速方式/';
+          this.page.identifier = '2017/04/15/上传文件至美国服务器的一种提速方式/';
+          this.page.title = '上传文件至美国服务器的一种提速方式';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://chace0120.disqus.com/embed.js';
